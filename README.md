@@ -16,7 +16,7 @@ The REST API documentation can be found on [www.relax.ai](https://www.relax.ai).
 
 ```sh
 # install from PyPI
-pip install --pre relaxai
+pip install relaxai
 ```
 
 ## Usage
@@ -88,7 +88,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre relaxai[aiohttp]
+pip install relaxai[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
