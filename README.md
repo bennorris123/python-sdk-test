@@ -15,8 +15,8 @@ The REST API documentation can be found on [www.relax.ai](https://www.relax.ai).
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/relaxai-python.git
+# install from the production repo
+pip install git+ssh://git@github.com/relax-ai/python-sdk.git
 ```
 
 > [!NOTE]
@@ -90,8 +90,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from this staging repo
-pip install 'relaxai[aiohttp] @ git+ssh://git@github.com/stainless-sdks/relaxai-python.git'
+# install from the production repo
+pip install 'relaxai[aiohttp] @ git+ssh://git@github.com/relax-ai/python-sdk.git'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -317,9 +317,9 @@ chat = response.parse()  # get the object that `chat.create_completion()` would 
 print(chat.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/relaxai-python/tree/main/src/relaxai/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/relax-ai/python-sdk/tree/main/src/relaxai/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/relaxai-python/tree/main/src/relaxai/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/relax-ai/python-sdk/tree/main/src/relaxai/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -431,7 +431,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/relaxai-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/relax-ai/python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 

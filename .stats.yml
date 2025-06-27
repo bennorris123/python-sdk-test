@@ -1,4 +1,4 @@
 configured_endpoints: 5
 openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/civo%2Frelaxai-ca3df58b448690617c749fa2fd5aed1167dc743e57b2ee962b5520c0248a1730.yml
 openapi_spec_hash: 2dd95dddf58e2b32908eb05fd7304233
-config_hash: 23542888a743c25c795ab7df2e7b66ac
+config_hash: 79c97cf71059044ab774923cf0dbdf14
