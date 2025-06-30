@@ -79,7 +79,7 @@ class Relaxai(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("RELAXAI_BASE_URL")
         if base_url is None:
-            base_url = f"/"
+            base_url = f"http://127.0.0.1"
 
         super().__init__(
             version=__version__,
@@ -262,7 +262,7 @@ class AsyncRelaxai(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("RELAXAI_BASE_URL")
         if base_url is None:
-            base_url = f"/"
+            base_url = f"http://127.0.0.1"
 
         super().__init__(
             version=__version__,
