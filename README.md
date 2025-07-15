@@ -95,7 +95,6 @@ pip install relaxai[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from relaxai import DefaultAioHttpClient
 from relaxai import AsyncRelaxai
@@ -103,7 +102,7 @@ from relaxai import AsyncRelaxai
 
 async def main() -> None:
     async with AsyncRelaxai(
-        api_key=os.environ.get("RELAXAI_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.chat.create_completion(
