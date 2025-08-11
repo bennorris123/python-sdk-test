@@ -66,15 +66,3 @@ Methods:
 
 - <code title="get /v1/models/{model}">client.models.<a href="./src/relaxai_test/resources/models.py">retrieve</a>(model) -> <a href="./src/relaxai_test/types/model.py">Model</a></code>
 - <code title="get /v1/models">client.models.<a href="./src/relaxai_test/resources/models.py">list</a>() -> <a href="./src/relaxai_test/types/model_list_response.py">ModelListResponse</a></code>
-
-# Tools
-
-Types:
-
-```python
-from relaxai_test.types import ToolScrapResponse
-```
-
-Methods:
-
-- <code title="post /v1/tools/scrap">client.tools.<a href="./src/relaxai_test/resources/tools.py">scrap</a>(\*\*<a href="src/relaxai_test/types/tool_scrap_params.py">params</a>) -> <a href="./src/relaxai_test/types/tool_scrap_response.py">ToolScrapResponse</a></code>

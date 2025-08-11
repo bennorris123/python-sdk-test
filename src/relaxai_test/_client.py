@@ -22,7 +22,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import chat, tools, health, models, embeddings, completions
+from .resources import chat, health, models, embeddings, completions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -49,7 +49,6 @@ class RelaxaiTest(SyncAPIClient):
     embeddings: embeddings.EmbeddingsResource
     health: health.HealthResource
     models: models.ModelsResource
-    tools: tools.ToolsResource
     with_raw_response: RelaxaiTestWithRawResponse
     with_streaming_response: RelaxaiTestWithStreamedResponse
 
@@ -108,7 +107,6 @@ class RelaxaiTest(SyncAPIClient):
         self.embeddings = embeddings.EmbeddingsResource(self)
         self.health = health.HealthResource(self)
         self.models = models.ModelsResource(self)
-        self.tools = tools.ToolsResource(self)
         self.with_raw_response = RelaxaiTestWithRawResponse(self)
         self.with_streaming_response = RelaxaiTestWithStreamedResponse(self)
 
@@ -236,7 +234,6 @@ class AsyncRelaxaiTest(AsyncAPIClient):
     embeddings: embeddings.AsyncEmbeddingsResource
     health: health.AsyncHealthResource
     models: models.AsyncModelsResource
-    tools: tools.AsyncToolsResource
     with_raw_response: AsyncRelaxaiTestWithRawResponse
     with_streaming_response: AsyncRelaxaiTestWithStreamedResponse
 
@@ -295,7 +292,6 @@ class AsyncRelaxaiTest(AsyncAPIClient):
         self.embeddings = embeddings.AsyncEmbeddingsResource(self)
         self.health = health.AsyncHealthResource(self)
         self.models = models.AsyncModelsResource(self)
-        self.tools = tools.AsyncToolsResource(self)
         self.with_raw_response = AsyncRelaxaiTestWithRawResponse(self)
         self.with_streaming_response = AsyncRelaxaiTestWithStreamedResponse(self)
 
@@ -424,7 +420,6 @@ class RelaxaiTestWithRawResponse:
         self.embeddings = embeddings.EmbeddingsResourceWithRawResponse(client.embeddings)
         self.health = health.HealthResourceWithRawResponse(client.health)
         self.models = models.ModelsResourceWithRawResponse(client.models)
-        self.tools = tools.ToolsResourceWithRawResponse(client.tools)
 
 
 class AsyncRelaxaiTestWithRawResponse:
@@ -434,7 +429,6 @@ class AsyncRelaxaiTestWithRawResponse:
         self.embeddings = embeddings.AsyncEmbeddingsResourceWithRawResponse(client.embeddings)
         self.health = health.AsyncHealthResourceWithRawResponse(client.health)
         self.models = models.AsyncModelsResourceWithRawResponse(client.models)
-        self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
 
 
 class RelaxaiTestWithStreamedResponse:
@@ -444,7 +438,6 @@ class RelaxaiTestWithStreamedResponse:
         self.embeddings = embeddings.EmbeddingsResourceWithStreamingResponse(client.embeddings)
         self.health = health.HealthResourceWithStreamingResponse(client.health)
         self.models = models.ModelsResourceWithStreamingResponse(client.models)
-        self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
 
 
 class AsyncRelaxaiTestWithStreamedResponse:
@@ -454,7 +447,6 @@ class AsyncRelaxaiTestWithStreamedResponse:
         self.embeddings = embeddings.AsyncEmbeddingsResourceWithStreamingResponse(client.embeddings)
         self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
         self.models = models.AsyncModelsResourceWithStreamingResponse(client.models)
-        self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
 
 
 Client = RelaxaiTest
