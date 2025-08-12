@@ -29,7 +29,7 @@ import os
 from relaxai_test import RelaxaiTest
 
 client = RelaxaiTest(
-    api_key=os.environ.get("RELAXAI_TEST_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("RELAXAI_API_KEY"),  # This is the default and can be omitted
 )
 
 response = client.chat.create_completion(
@@ -46,7 +46,7 @@ print(response.id)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `RELAXAI_TEST_API_KEY="My API Key"` to your `.env` file
+to add `RELAXAI_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -59,7 +59,7 @@ import asyncio
 from relaxai_test import AsyncRelaxaiTest
 
 client = AsyncRelaxaiTest(
-    api_key=os.environ.get("RELAXAI_TEST_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("RELAXAI_API_KEY"),  # This is the default and can be omitted
 )
 
 
