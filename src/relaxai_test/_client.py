@@ -80,10 +80,10 @@ class RelaxaiTest(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous RelaxaiTest client instance.
 
-        This automatically infers the `api_key` argument from the `RELAXAI_TEST_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `RELAXAI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("RELAXAI_TEST_API_KEY")
+            api_key = os.environ.get("RELAXAI_API_KEY")
         self.api_key = api_key
 
         if base_url is None:
@@ -265,10 +265,10 @@ class AsyncRelaxaiTest(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncRelaxaiTest client instance.
 
-        This automatically infers the `api_key` argument from the `RELAXAI_TEST_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `RELAXAI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("RELAXAI_TEST_API_KEY")
+            api_key = os.environ.get("RELAXAI_API_KEY")
         self.api_key = api_key
 
         if base_url is None:
