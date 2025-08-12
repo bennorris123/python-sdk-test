@@ -36,10 +36,18 @@ response = client.chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
-        }
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "multi_content": [{}],
+            "role": "user",
+            "content": "Tell me about climate change.",
+        },
     ],
-    model="model",
+    model="DeepSeek-R1-0528",
+    max_tokens=100,
+    temperature=0.7,
 )
 print(response.id)
 ```
@@ -68,10 +76,18 @@ async def main() -> None:
         messages=[
             {
                 "multi_content": [{}],
-                "role": "role",
-            }
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "multi_content": [{}],
+                "role": "user",
+                "content": "Tell me about climate change.",
+            },
         ],
-        model="model",
+        model="DeepSeek-R1-0528",
+        max_tokens=100,
+        temperature=0.7,
     )
     print(response.id)
 
@@ -109,10 +125,18 @@ async def main() -> None:
             messages=[
                 {
                     "multi_content": [{}],
-                    "role": "role",
-                }
+                    "role": "system",
+                    "content": "You are a helpful assistant.",
+                },
+                {
+                    "multi_content": [{}],
+                    "role": "user",
+                    "content": "Tell me about climate change.",
+                },
             ],
-            model="model",
+            model="DeepSeek-R1-0528",
+            max_tokens=100,
+            temperature=0.7,
         )
         print(response.id)
 
@@ -174,10 +198,18 @@ try:
         messages=[
             {
                 "multi_content": [{}],
-                "role": "role",
-            }
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "multi_content": [{}],
+                "role": "user",
+                "content": "Tell me about climate change.",
+            },
         ],
-        model="model",
+        model="DeepSeek-R1-0528",
+        max_tokens=100,
+        temperature=0.7,
     )
 except relaxai.APIConnectionError as e:
     print("The server could not be reached")
@@ -225,10 +257,18 @@ client.with_options(max_retries=5).chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
-        }
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "multi_content": [{}],
+            "role": "user",
+            "content": "Tell me about climate change.",
+        },
     ],
-    model="model",
+    model="DeepSeek-R1-0528",
+    max_tokens=100,
+    temperature=0.7,
 )
 ```
 
@@ -256,10 +296,18 @@ client.with_options(timeout=5.0).chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
-        }
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "multi_content": [{}],
+            "role": "user",
+            "content": "Tell me about climate change.",
+        },
     ],
-    model="model",
+    model="DeepSeek-R1-0528",
+    max_tokens=100,
+    temperature=0.7,
 )
 ```
 
@@ -304,9 +352,16 @@ client = Relaxai()
 response = client.chat.with_raw_response.create_completion(
     messages=[{
         "multi_content": [{}],
-        "role": "role",
+        "role": "system",
+        "content": "You are a helpful assistant.",
+    }, {
+        "multi_content": [{}],
+        "role": "user",
+        "content": "Tell me about climate change.",
     }],
-    model="model",
+    model="DeepSeek-R1-0528",
+    max_tokens=100,
+    temperature=0.7,
 )
 print(response.headers.get('X-My-Header'))
 
@@ -329,10 +384,18 @@ with client.chat.with_streaming_response.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
-        }
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "multi_content": [{}],
+            "role": "user",
+            "content": "Tell me about climate change.",
+        },
     ],
-    model="model",
+    model="DeepSeek-R1-0528",
+    max_tokens=100,
+    temperature=0.7,
 ) as response:
     print(response.headers.get("X-My-Header"))
 
