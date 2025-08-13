@@ -6,80 +6,17 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .shared.openai_usage import OpenAIUsage
+from .content_filter_results import ContentFilterResults
 from .chat_completion_message import ChatCompletionMessage
 
 __all__ = [
     "ChatCompletionResponse",
     "Choice",
-    "ChoiceContentFilterResults",
-    "ChoiceContentFilterResultsHate",
-    "ChoiceContentFilterResultsJailbreak",
-    "ChoiceContentFilterResultsProfanity",
-    "ChoiceContentFilterResultsSelfHarm",
-    "ChoiceContentFilterResultsSexual",
-    "ChoiceContentFilterResultsViolence",
     "ChoiceLogprobs",
     "ChoiceLogprobsContent",
     "ChoiceLogprobsContentTopLogprob",
     "PromptFilterResult",
-    "PromptFilterResultContentFilterResults",
-    "PromptFilterResultContentFilterResultsHate",
-    "PromptFilterResultContentFilterResultsJailbreak",
-    "PromptFilterResultContentFilterResultsProfanity",
-    "PromptFilterResultContentFilterResultsSelfHarm",
-    "PromptFilterResultContentFilterResultsSexual",
-    "PromptFilterResultContentFilterResultsViolence",
 ]
-
-
-class ChoiceContentFilterResultsHate(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class ChoiceContentFilterResultsJailbreak(BaseModel):
-    detected: bool
-
-    filtered: bool
-
-
-class ChoiceContentFilterResultsProfanity(BaseModel):
-    detected: bool
-
-    filtered: bool
-
-
-class ChoiceContentFilterResultsSelfHarm(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class ChoiceContentFilterResultsSexual(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class ChoiceContentFilterResultsViolence(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class ChoiceContentFilterResults(BaseModel):
-    hate: Optional[ChoiceContentFilterResultsHate] = None
-
-    jailbreak: Optional[ChoiceContentFilterResultsJailbreak] = None
-
-    profanity: Optional[ChoiceContentFilterResultsProfanity] = None
-
-    self_harm: Optional[ChoiceContentFilterResultsSelfHarm] = None
-
-    sexual: Optional[ChoiceContentFilterResultsSexual] = None
-
-    violence: Optional[ChoiceContentFilterResultsViolence] = None
 
 
 class ChoiceLogprobsContentTopLogprob(BaseModel):
@@ -111,65 +48,15 @@ class Choice(BaseModel):
 
     message: ChatCompletionMessage
 
-    content_filter_results: Optional[ChoiceContentFilterResults] = None
+    content_filter_results: Optional[ContentFilterResults] = None
 
     logprobs: Optional[ChoiceLogprobs] = None
-
-
-class PromptFilterResultContentFilterResultsHate(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class PromptFilterResultContentFilterResultsJailbreak(BaseModel):
-    detected: bool
-
-    filtered: bool
-
-
-class PromptFilterResultContentFilterResultsProfanity(BaseModel):
-    detected: bool
-
-    filtered: bool
-
-
-class PromptFilterResultContentFilterResultsSelfHarm(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class PromptFilterResultContentFilterResultsSexual(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class PromptFilterResultContentFilterResultsViolence(BaseModel):
-    filtered: bool
-
-    severity: Optional[str] = None
-
-
-class PromptFilterResultContentFilterResults(BaseModel):
-    hate: Optional[PromptFilterResultContentFilterResultsHate] = None
-
-    jailbreak: Optional[PromptFilterResultContentFilterResultsJailbreak] = None
-
-    profanity: Optional[PromptFilterResultContentFilterResultsProfanity] = None
-
-    self_harm: Optional[PromptFilterResultContentFilterResultsSelfHarm] = None
-
-    sexual: Optional[PromptFilterResultContentFilterResultsSexual] = None
-
-    violence: Optional[PromptFilterResultContentFilterResultsViolence] = None
 
 
 class PromptFilterResult(BaseModel):
     index: int
 
-    content_filter_results: Optional[PromptFilterResultContentFilterResults] = None
+    content_filter_results: Optional[ContentFilterResults] = None
 
 
 class ChatCompletionResponse(BaseModel):
