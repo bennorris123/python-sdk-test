@@ -5,11 +5,18 @@ from __future__ import annotations
 from typing import Dict, List, Iterable
 from typing_extensions import Required, TypedDict
 
-from .stream_options_param import StreamOptionsParam
-from .function_definition_param import FunctionDefinitionParam
 from .chat_completion_message_param import ChatCompletionMessageParam
 
-__all__ = ["ChatCreateCompletionParams", "Prediction", "ResponseFormat", "ResponseFormatJsonSchema", "Tool"]
+__all__ = [
+    "ChatCreateCompletionParams",
+    "Function",
+    "Prediction",
+    "ResponseFormat",
+    "ResponseFormatJsonSchema",
+    "StreamOptions",
+    "Tool",
+    "ToolFunction",
+]
 
 
 class ChatCreateCompletionParams(TypedDict, total=False):
@@ -23,7 +30,7 @@ class ChatCreateCompletionParams(TypedDict, total=False):
 
     function_call: object
 
-    functions: Iterable[FunctionDefinitionParam]
+    functions: Iterable[Function]
 
     logit_bias: Dict[str, int]
 
@@ -55,7 +62,7 @@ class ChatCreateCompletionParams(TypedDict, total=False):
 
     stream: bool
 
-    stream_options: StreamOptionsParam
+    stream_options: StreamOptions
 
     temperature: float
 
@@ -68,6 +75,16 @@ class ChatCreateCompletionParams(TypedDict, total=False):
     top_p: float
 
     user: str
+
+
+class Function(TypedDict, total=False):
+    name: Required[str]
+
+    parameters: Required[object]
+
+    description: str
+
+    strict: bool
 
 
 class Prediction(TypedDict, total=False):
@@ -90,7 +107,21 @@ class ResponseFormat(TypedDict, total=False):
     type: str
 
 
+class StreamOptions(TypedDict, total=False):
+    include_usage: bool
+
+
+class ToolFunction(TypedDict, total=False):
+    name: Required[str]
+
+    parameters: Required[object]
+
+    description: str
+
+    strict: bool
+
+
 class Tool(TypedDict, total=False):
     type: Required[str]
 
-    function: FunctionDefinitionParam
+    function: ToolFunction

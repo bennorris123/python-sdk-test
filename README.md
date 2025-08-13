@@ -35,7 +35,6 @@ client = Relaxai(
 chat_completion_response = client.chat.create_completion(
     messages=[
         {
-            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -69,7 +68,6 @@ async def main() -> None:
     chat_completion_response = await client.chat.create_completion(
         messages=[
             {
-                "multi_content": [{}],
                 "role": "user",
                 "content": "Hello, how are you?",
             }
@@ -112,7 +110,6 @@ async def main() -> None:
         chat_completion_response = await client.chat.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
                     "role": "user",
                     "content": "Hello, how are you?",
                 }
@@ -147,7 +144,7 @@ client = Relaxai()
 chat_completion_response = client.chat.create_completion(
     messages=[
         {
-            "multi_content": [{}],
+            "content": "content",
             "role": "role",
         }
     ],
@@ -179,7 +176,6 @@ try:
     client.chat.create_completion(
         messages=[
             {
-                "multi_content": [{}],
                 "role": "user",
                 "content": "Hello, how are you?",
             }
@@ -232,7 +228,6 @@ client = Relaxai(
 client.with_options(max_retries=5).chat.create_completion(
     messages=[
         {
-            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -265,7 +260,6 @@ client = Relaxai(
 client.with_options(timeout=5.0).chat.create_completion(
     messages=[
         {
-            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -315,7 +309,6 @@ from relaxai import Relaxai
 client = Relaxai()
 response = client.chat.with_raw_response.create_completion(
     messages=[{
-        "multi_content": [{}],
         "role": "user",
         "content": "Hello, how are you?",
     }],
@@ -342,7 +335,6 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.chat.with_streaming_response.create_completion(
     messages=[
         {
-            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
