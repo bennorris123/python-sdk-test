@@ -39,7 +39,7 @@ chat_completion_response = client.chat.create_completion(
             "content": "Hello, how are you?",
         }
     ],
-    model="gpt-4-turbo",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
 )
 print(chat_completion_response.choices)
@@ -72,7 +72,7 @@ async def main() -> None:
                 "content": "Hello, how are you?",
             }
         ],
-        model="gpt-4-turbo",
+        model="Llama-4-Maverick-17B-128E",
         max_tokens=100,
     )
     print(chat_completion_response.choices)
@@ -114,7 +114,7 @@ async def main() -> None:
                     "content": "Hello, how are you?",
                 }
             ],
-            model="gpt-4-turbo",
+            model="Llama-4-Maverick-17B-128E",
             max_tokens=100,
         )
         print(chat_completion_response.choices)
