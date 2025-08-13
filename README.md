@@ -42,7 +42,7 @@ chat_completion_response = client.chat.create_completion(
     model="gpt-4-turbo",
     max_tokens=100,
 )
-print(chat_completion_response.id)
+print(chat_completion_response.choices)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -75,7 +75,7 @@ async def main() -> None:
         model="gpt-4-turbo",
         max_tokens=100,
     )
-    print(chat_completion_response.id)
+    print(chat_completion_response.choices)
 
 
 asyncio.run(main())
@@ -117,7 +117,7 @@ async def main() -> None:
             model="gpt-4-turbo",
             max_tokens=100,
         )
-        print(chat_completion_response.id)
+        print(chat_completion_response.choices)
 
 
 asyncio.run(main())
