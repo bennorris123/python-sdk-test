@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from relaxai_test import Relaxai, AsyncRelaxai
-from relaxai_test._streaming import Stream, AsyncStream, ServerSentEvent
+from relaxai import Relaxai, AsyncRelaxai
+from relaxai._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

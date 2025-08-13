@@ -7,8 +7,8 @@ from typing import Any, cast
 
 import pytest
 
+from relaxai import Relaxai, AsyncRelaxai
 from tests.utils import assert_matches_type
-from relaxai_test import Relaxai, AsyncRelaxai
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

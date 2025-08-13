@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from relaxai_test._types import NOT_GIVEN, Base64FileInput
-from relaxai_test._utils import (
+from relaxai._types import NOT_GIVEN, Base64FileInput
+from relaxai._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from relaxai_test._compat import PYDANTIC_V2
-from relaxai_test._models import BaseModel
+from relaxai._compat import PYDANTIC_V2
+from relaxai._models import BaseModel
 
 _T = TypeVar("_T")
 
