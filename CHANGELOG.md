@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 (2025-08-13)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/bennorris123/python-sdk-test/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** update via SDK Studio ([883a23e](https://github.com/bennorris123/python-sdk-test/commit/883a23e253dc4105c84e0d051ea9a8e32f2468af))
+* **api:** update via SDK Studio ([4533f35](https://github.com/bennorris123/python-sdk-test/commit/4533f35c1bfb027b9b1c79879973001410f9b1f3))
+
 ## 0.3.0 (2025-08-13)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/bennorris123/python-sdk-test/compare/v0.2.0...v0.3.0)
