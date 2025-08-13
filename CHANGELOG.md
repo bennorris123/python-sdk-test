@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2025-08-13)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/bennorris123/python-sdk-test/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* sync repo ([51d2d54](https://github.com/bennorris123/python-sdk-test/commit/51d2d54b3b293398470493840de4ae38298ea895))
+
 ## 0.2.0 (2025-08-12)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/bennorris123/python-sdk-test/compare/v0.1.0...v0.2.0)
