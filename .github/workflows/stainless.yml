@@ -13,9 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  STAINLESS_ORG: YOUR_ORG
-  STAINLESS_PROJECT: YOUR_PROJECT
-  OAS_PATH: YOUR_OAS_PATH
+  STAINLESS_ORG: civo
+  STAINLESS_PROJECT: relaxai-test
 
 jobs:
   preview:
