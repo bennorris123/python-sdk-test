@@ -6,21 +6,9 @@ from typing import Iterable
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .function_call_param import FunctionCallParam
 
-__all__ = [
-    "ChatCompletionMessageParam",
-    "FunctionCall",
-    "MultiContent",
-    "MultiContentImageURL",
-    "ToolCall",
-    "ToolCallFunction",
-]
-
-
-class FunctionCall(TypedDict, total=False):
-    arguments: str
-
-    name: str
+__all__ = ["ChatCompletionMessageParam", "MultiContent", "MultiContentImageURL", "ToolCall"]
 
 
 class MultiContentImageURL(TypedDict, total=False):
@@ -37,14 +25,8 @@ class MultiContent(TypedDict, total=False):
     type: str
 
 
-class ToolCallFunction(TypedDict, total=False):
-    arguments: str
-
-    name: str
-
-
 class ToolCall(TypedDict, total=False):
-    function: Required[ToolCallFunction]
+    function: Required[FunctionCallParam]
 
     type: Required[str]
 
@@ -58,7 +40,7 @@ class ChatCompletionMessageParam(TypedDict, total=False):
 
     role: Required[str]
 
-    function_call: FunctionCall
+    function_call: FunctionCallParam
 
     multi_content: Annotated[Iterable[MultiContent], PropertyInfo(alias="MultiContent")]
 
