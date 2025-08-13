@@ -5,21 +5,9 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .function_call import FunctionCall
 
-__all__ = [
-    "ChatCompletionMessage",
-    "FunctionCall",
-    "MultiContent",
-    "MultiContentImageURL",
-    "ToolCall",
-    "ToolCallFunction",
-]
-
-
-class FunctionCall(BaseModel):
-    arguments: Optional[str] = None
-
-    name: Optional[str] = None
+__all__ = ["ChatCompletionMessage", "MultiContent", "MultiContentImageURL", "ToolCall"]
 
 
 class MultiContentImageURL(BaseModel):
@@ -36,14 +24,8 @@ class MultiContent(BaseModel):
     type: Optional[str] = None
 
 
-class ToolCallFunction(BaseModel):
-    arguments: Optional[str] = None
-
-    name: Optional[str] = None
-
-
 class ToolCall(BaseModel):
-    function: ToolCallFunction
+    function: FunctionCall
 
     type: str
 
