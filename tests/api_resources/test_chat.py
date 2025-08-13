@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from relaxai import Relaxai, AsyncRelaxai
 from tests.utils import assert_matches_type
-from relaxai_test import RelaxaiTest, AsyncRelaxaiTest
-from relaxai_test.types import ChatCreateCompletionResponse
+from relaxai.types import ChatCompletionResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestChat:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_completion(self, client: RelaxaiTest) -> None:
+    def test_method_create_completion(self, client: Relaxai) -> None:
         chat = client.chat.create_completion(
             messages=[
                 {
@@ -29,11 +29,11 @@ class TestChat:
             ],
             model="model",
         )
-        assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+        assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_completion_with_all_params(self, client: RelaxaiTest) -> None:
+    def test_method_create_completion_with_all_params(self, client: Relaxai) -> None:
         chat = client.chat.create_completion(
             messages=[
                 {
@@ -98,7 +98,6 @@ class TestChat:
             response_format={
                 "json_schema": {
                     "name": "name",
-                    "schema": {"foo": "bar"},
                     "strict": True,
                     "description": "description",
                 },
@@ -126,11 +125,11 @@ class TestChat:
             top_p=0,
             user="user",
         )
-        assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+        assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_completion(self, client: RelaxaiTest) -> None:
+    def test_raw_response_create_completion(self, client: Relaxai) -> None:
         response = client.chat.with_raw_response.create_completion(
             messages=[
                 {
@@ -144,11 +143,11 @@ class TestChat:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         chat = response.parse()
-        assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+        assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_completion(self, client: RelaxaiTest) -> None:
+    def test_streaming_response_create_completion(self, client: Relaxai) -> None:
         with client.chat.with_streaming_response.create_completion(
             messages=[
                 {
@@ -162,7 +161,7 @@ class TestChat:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             chat = response.parse()
-            assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+            assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -174,7 +173,7 @@ class TestAsyncChat:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_completion(self, async_client: AsyncRelaxaiTest) -> None:
+    async def test_method_create_completion(self, async_client: AsyncRelaxai) -> None:
         chat = await async_client.chat.create_completion(
             messages=[
                 {
@@ -184,11 +183,11 @@ class TestAsyncChat:
             ],
             model="model",
         )
-        assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+        assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_completion_with_all_params(self, async_client: AsyncRelaxaiTest) -> None:
+    async def test_method_create_completion_with_all_params(self, async_client: AsyncRelaxai) -> None:
         chat = await async_client.chat.create_completion(
             messages=[
                 {
@@ -253,7 +252,6 @@ class TestAsyncChat:
             response_format={
                 "json_schema": {
                     "name": "name",
-                    "schema": {"foo": "bar"},
                     "strict": True,
                     "description": "description",
                 },
@@ -281,11 +279,11 @@ class TestAsyncChat:
             top_p=0,
             user="user",
         )
-        assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+        assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_completion(self, async_client: AsyncRelaxaiTest) -> None:
+    async def test_raw_response_create_completion(self, async_client: AsyncRelaxai) -> None:
         response = await async_client.chat.with_raw_response.create_completion(
             messages=[
                 {
@@ -299,11 +297,11 @@ class TestAsyncChat:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         chat = await response.parse()
-        assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+        assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_completion(self, async_client: AsyncRelaxaiTest) -> None:
+    async def test_streaming_response_create_completion(self, async_client: AsyncRelaxai) -> None:
         async with async_client.chat.with_streaming_response.create_completion(
             messages=[
                 {
@@ -317,6 +315,6 @@ class TestAsyncChat:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             chat = await response.parse()
-            assert_matches_type(ChatCreateCompletionResponse, chat, path=["response"])
+            assert_matches_type(ChatCompletionResponse, chat, path=["response"])
 
         assert cast(Any, response.is_closed) is True

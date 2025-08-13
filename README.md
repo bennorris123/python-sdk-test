@@ -1,9 +1,9 @@
-# Relaxai Test Python API library
+# Relaxai Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/relaxai_test.svg?label=pypi%20(stable))](https://pypi.org/project/relaxai_test/)
+[![PyPI version](https://img.shields.io/pypi/v/relaxai-test.svg?label=pypi%20(stable))](https://pypi.org/project/relaxai-test/)
 
-The Relaxai Test Python library provides convenient access to the Relaxai Test REST API from any Python 3.8+
+The Relaxai Python library provides convenient access to the Relaxai REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -17,7 +17,7 @@ The REST API documentation can be found on [www.relax.ai](https://www.relax.ai).
 
 ```sh
 # install from PyPI
-pip install relaxai_test
+pip install relaxai-test
 ```
 
 ## Usage
@@ -26,54 +26,58 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from relaxai_test import RelaxaiTest
+from relaxai import Relaxai
 
-client = RelaxaiTest(
-    api_key=os.environ.get("RELAXAI_API_KEY"),  # This is the default and can be omitted
+client = Relaxai(
+    api_key=os.environ.get("RELAXAI_TEST_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.chat.create_completion(
+chat_completion_response = client.chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
+            "role": "user",
+            "content": "Hello, how are you?",
         }
     ],
-    model="model",
+    model="gpt-4-turbo",
+    max_tokens=100,
 )
-print(response.id)
+print(chat_completion_response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `RELAXAI_API_KEY="My API Key"` to your `.env` file
+to add `RELAXAI_TEST_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncRelaxaiTest` instead of `RelaxaiTest` and use `await` with each API call:
+Simply import `AsyncRelaxai` instead of `Relaxai` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from relaxai_test import AsyncRelaxaiTest
+from relaxai import AsyncRelaxai
 
-client = AsyncRelaxaiTest(
-    api_key=os.environ.get("RELAXAI_API_KEY"),  # This is the default and can be omitted
+client = AsyncRelaxai(
+    api_key=os.environ.get("RELAXAI_TEST_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    response = await client.chat.create_completion(
+    chat_completion_response = await client.chat.create_completion(
         messages=[
             {
                 "multi_content": [{}],
-                "role": "role",
+                "role": "user",
+                "content": "Hello, how are you?",
             }
         ],
-        model="model",
+        model="gpt-4-turbo",
+        max_tokens=100,
     )
-    print(response.id)
+    print(chat_completion_response.id)
 
 
 asyncio.run(main())
@@ -89,32 +93,34 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install relaxai_test[aiohttp]
+pip install relaxai-test[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
 import asyncio
-from relaxai_test import DefaultAioHttpClient
-from relaxai_test import AsyncRelaxaiTest
+from relaxai import DefaultAioHttpClient
+from relaxai import AsyncRelaxai
 
 
 async def main() -> None:
-    async with AsyncRelaxaiTest(
+    async with AsyncRelaxai(
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.chat.create_completion(
+        chat_completion_response = await client.chat.create_completion(
             messages=[
                 {
                     "multi_content": [{}],
-                    "role": "role",
+                    "role": "user",
+                    "content": "Hello, how are you?",
                 }
             ],
-            model="model",
+            model="gpt-4-turbo",
+            max_tokens=100,
         )
-        print(response.id)
+        print(chat_completion_response.id)
 
 
 asyncio.run(main())
@@ -134,11 +140,11 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from relaxai_test import RelaxaiTest
+from relaxai import Relaxai
 
-client = RelaxaiTest()
+client = Relaxai()
 
-response = client.chat.create_completion(
+chat_completion_response = client.chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
@@ -151,40 +157,42 @@ response = client.chat.create_completion(
         "type": "type",
     },
 )
-print(response.prediction)
+print(chat_completion_response.prediction)
 ```
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `relaxai_test.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `relaxai.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `relaxai_test.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `relaxai.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `relaxai_test.APIError`.
+All errors inherit from `relaxai.APIError`.
 
 ```python
-import relaxai_test
-from relaxai_test import RelaxaiTest
+import relaxai
+from relaxai import Relaxai
 
-client = RelaxaiTest()
+client = Relaxai()
 
 try:
     client.chat.create_completion(
         messages=[
             {
                 "multi_content": [{}],
-                "role": "role",
+                "role": "user",
+                "content": "Hello, how are you?",
             }
         ],
-        model="model",
+        model="gpt-4-turbo",
+        max_tokens=100,
     )
-except relaxai_test.APIConnectionError as e:
+except relaxai.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except relaxai_test.RateLimitError as e:
+except relaxai.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except relaxai_test.APIStatusError as e:
+except relaxai.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -212,10 +220,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from relaxai_test import RelaxaiTest
+from relaxai import Relaxai
 
 # Configure the default for all requests:
-client = RelaxaiTest(
+client = Relaxai(
     # default is 2
     max_retries=0,
 )
@@ -225,10 +233,12 @@ client.with_options(max_retries=5).chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
+            "role": "user",
+            "content": "Hello, how are you?",
         }
     ],
-    model="model",
+    model="gpt-4-turbo",
+    max_tokens=100,
 )
 ```
 
@@ -238,16 +248,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from relaxai_test import RelaxaiTest
+from relaxai import Relaxai
 
 # Configure the default for all requests:
-client = RelaxaiTest(
+client = Relaxai(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = RelaxaiTest(
+client = Relaxai(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -256,10 +266,12 @@ client.with_options(timeout=5.0).chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
+            "role": "user",
+            "content": "Hello, how are you?",
         }
     ],
-    model="model",
+    model="gpt-4-turbo",
+    max_tokens=100,
 )
 ```
 
@@ -273,10 +285,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `RELAXAI_TEST_LOG` to `info`.
+You can enable logging by setting the environment variable `RELAXAI_LOG` to `info`.
 
 ```shell
-$ export RELAXAI_TEST_LOG=info
+$ export RELAXAI_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -298,15 +310,17 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from relaxai_test import RelaxaiTest
+from relaxai import Relaxai
 
-client = RelaxaiTest()
+client = Relaxai()
 response = client.chat.with_raw_response.create_completion(
     messages=[{
         "multi_content": [{}],
-        "role": "role",
+        "role": "user",
+        "content": "Hello, how are you?",
     }],
-    model="model",
+    model="gpt-4-turbo",
+    max_tokens=100,
 )
 print(response.headers.get('X-My-Header'))
 
@@ -314,9 +328,9 @@ chat = response.parse()  # get the object that `chat.create_completion()` would 
 print(chat.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/bennorris123/python-sdk-test/tree/main/src/relaxai_test/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/bennorris123/python-sdk-test/tree/main/src/relaxai/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/bennorris123/python-sdk-test/tree/main/src/relaxai_test/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/bennorris123/python-sdk-test/tree/main/src/relaxai/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -329,10 +343,12 @@ with client.chat.with_streaming_response.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "role",
+            "role": "user",
+            "content": "Hello, how are you?",
         }
     ],
-    model="model",
+    model="gpt-4-turbo",
+    max_tokens=100,
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -386,10 +402,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from relaxai_test import RelaxaiTest, DefaultHttpxClient
+from relaxai import Relaxai, DefaultHttpxClient
 
-client = RelaxaiTest(
-    # Or use the `RELAXAI_TEST_BASE_URL` env var
+client = Relaxai(
+    # Or use the `RELAXAI_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -409,9 +425,9 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from relaxai_test import RelaxaiTest
+from relaxai import Relaxai
 
-with RelaxaiTest() as client:
+with Relaxai() as client:
   # make requests here
   ...
 
@@ -437,8 +453,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import relaxai_test
-print(relaxai_test.__version__)
+import relaxai
+print(relaxai.__version__)
 ```
 
 ## Requirements

@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from relaxai_test._types import FileTypes
-from relaxai_test._utils import extract_files
+from relaxai._types import FileTypes
+from relaxai._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

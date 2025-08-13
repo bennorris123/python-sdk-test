@@ -10,15 +10,15 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from relaxai_test import RelaxaiTest, AsyncRelaxaiTest, DefaultAioHttpClient
-from relaxai_test._utils import is_dict
+from relaxai import Relaxai, AsyncRelaxai, DefaultAioHttpClient
+from relaxai._utils import is_dict
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("relaxai_test").setLevel(logging.DEBUG)
+logging.getLogger("relaxai").setLevel(logging.DEBUG)
 
 
 # automatically add `pytest.mark.asyncio()` to all of our async tests
@@ -49,17 +49,17 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[RelaxaiTest]:
+def client(request: FixtureRequest) -> Iterator[Relaxai]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with RelaxaiTest(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Relaxai(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncRelaxaiTest]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncRelaxai]:
     param = getattr(request, "param", True)
 
     # defaults
@@ -78,7 +78,7 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncRelaxaiTes
     else:
         raise TypeError(f"Unexpected fixture parameter type {type(param)}, expected bool or dict")
 
-    async with AsyncRelaxaiTest(
+    async with AsyncRelaxai(
         base_url=base_url, api_key=api_key, _strict_response_validation=strict, http_client=http_client
     ) as client:
         yield client
