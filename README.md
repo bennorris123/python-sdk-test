@@ -180,7 +180,7 @@ try:
                 "content": "Hello, how are you?",
             }
         ],
-        model="gpt-4-turbo",
+        model="Llama-4-Maverick-17B-128E",
         max_tokens=100,
     )
 except relaxai.APIConnectionError as e:
@@ -232,7 +232,7 @@ client.with_options(max_retries=5).chat.create_completion(
             "content": "Hello, how are you?",
         }
     ],
-    model="gpt-4-turbo",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
 )
 ```
@@ -264,7 +264,7 @@ client.with_options(timeout=5.0).chat.create_completion(
             "content": "Hello, how are you?",
         }
     ],
-    model="gpt-4-turbo",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
 )
 ```
@@ -312,7 +312,7 @@ response = client.chat.with_raw_response.create_completion(
         "role": "user",
         "content": "Hello, how are you?",
     }],
-    model="gpt-4-turbo",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
 )
 print(response.headers.get('X-My-Header'))
@@ -339,7 +339,7 @@ with client.chat.with_streaming_response.create_completion(
             "content": "Hello, how are you?",
         }
     ],
-    model="gpt-4-turbo",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
 ) as response:
     print(response.headers.get("X-My-Header"))
