@@ -23,7 +23,7 @@ class TestChat:
         chat = client.chat.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
+                    "content": "content",
                     "role": "role",
                 }
             ],
@@ -37,6 +37,12 @@ class TestChat:
         chat = client.chat.create_completion(
             messages=[
                 {
+                    "content": "content",
+                    "role": "role",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
                     "multi_content": [
                         {
                             "image_url": {
@@ -47,12 +53,6 @@ class TestChat:
                             "type": "type",
                         }
                     ],
-                    "role": "role",
-                    "content": "content",
-                    "function_call": {
-                        "arguments": "arguments",
-                        "name": "name",
-                    },
                     "name": "name",
                     "reasoning_content": "reasoning_content",
                     "refusal": "refusal",
@@ -133,7 +133,7 @@ class TestChat:
         response = client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
+                    "content": "content",
                     "role": "role",
                 }
             ],
@@ -151,7 +151,7 @@ class TestChat:
         with client.chat.with_streaming_response.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
+                    "content": "content",
                     "role": "role",
                 }
             ],
@@ -177,7 +177,7 @@ class TestAsyncChat:
         chat = await async_client.chat.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
+                    "content": "content",
                     "role": "role",
                 }
             ],
@@ -191,6 +191,12 @@ class TestAsyncChat:
         chat = await async_client.chat.create_completion(
             messages=[
                 {
+                    "content": "content",
+                    "role": "role",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
                     "multi_content": [
                         {
                             "image_url": {
@@ -201,12 +207,6 @@ class TestAsyncChat:
                             "type": "type",
                         }
                     ],
-                    "role": "role",
-                    "content": "content",
-                    "function_call": {
-                        "arguments": "arguments",
-                        "name": "name",
-                    },
                     "name": "name",
                     "reasoning_content": "reasoning_content",
                     "refusal": "refusal",
@@ -287,7 +287,7 @@ class TestAsyncChat:
         response = await async_client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
+                    "content": "content",
                     "role": "role",
                 }
             ],
@@ -305,7 +305,7 @@ class TestAsyncChat:
         async with async_client.chat.with_streaming_response.create_completion(
             messages=[
                 {
-                    "multi_content": [{}],
+                    "content": "content",
                     "role": "role",
                 }
             ],

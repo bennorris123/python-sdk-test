@@ -21,15 +21,7 @@ Methods:
 Types:
 
 ```python
-from relaxai.types import (
-    ChatCompletionMessage,
-    ChatCompletionRequest,
-    ChatCompletionResponse,
-    ContentFilterResults,
-    FunctionCall,
-    FunctionDefinition,
-    StreamOptions,
-)
+from relaxai.types import ChatCompletionMessage, ChatCompletionRequest, ChatCompletionResponse
 ```
 
 Methods:
