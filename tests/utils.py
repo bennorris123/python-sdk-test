@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from relaxai._types import Omit, NoneType
-from relaxai._utils import (
+from relaxai_test._types import Omit, NoneType
+from relaxai_test._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -18,8 +18,8 @@ from relaxai._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from relaxai._compat import PYDANTIC_V2, field_outer_type, get_model_fields
-from relaxai._models import BaseModel
+from relaxai_test._compat import PYDANTIC_V2, field_outer_type, get_model_fields
+from relaxai_test._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

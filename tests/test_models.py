@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from relaxai._utils import PropertyInfo
-from relaxai._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from relaxai._models import BaseModel, construct_type
+from relaxai_test._utils import PropertyInfo
+from relaxai_test._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from relaxai_test._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):
