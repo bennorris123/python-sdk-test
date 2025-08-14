@@ -340,7 +340,7 @@ class TestRelaxai:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(RelaxaiError):
-            with update_env(**{"RELAXAI_TEST_API_KEY": Omit()}):
+            with update_env(**{"RELAXAI_API_KEY": Omit()}):
                 client2 = Relaxai(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1183,7 +1183,7 @@ class TestAsyncRelaxai:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(RelaxaiError):
-            with update_env(**{"RELAXAI_TEST_API_KEY": Omit()}):
+            with update_env(**{"RELAXAI_API_KEY": Omit()}):
                 client2 = AsyncRelaxai(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 

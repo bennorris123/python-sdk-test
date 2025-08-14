@@ -78,13 +78,13 @@ class Relaxai(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Relaxai client instance.
 
-        This automatically infers the `api_key` argument from the `RELAXAI_TEST_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `RELAXAI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("RELAXAI_TEST_API_KEY")
+            api_key = os.environ.get("RELAXAI_API_KEY")
         if api_key is None:
             raise RelaxaiError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the RELAXAI_TEST_API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the RELAXAI_API_KEY environment variable"
             )
         self.api_key = api_key
 
@@ -269,13 +269,13 @@ class AsyncRelaxai(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncRelaxai client instance.
 
-        This automatically infers the `api_key` argument from the `RELAXAI_TEST_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `RELAXAI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("RELAXAI_TEST_API_KEY")
+            api_key = os.environ.get("RELAXAI_API_KEY")
         if api_key is None:
             raise RelaxaiError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the RELAXAI_TEST_API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the RELAXAI_API_KEY environment variable"
             )
         self.api_key = api_key
 
