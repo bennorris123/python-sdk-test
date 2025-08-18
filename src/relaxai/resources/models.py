@@ -15,7 +15,7 @@ from .._response import (
 )
 from ..types.model import Model
 from .._base_client import make_request_options
-from ..types.model_list_response import ModelListResponse
+from ..types.model_list import ModelList
 
 __all__ = ["ModelsResource", "AsyncModelsResource"]
 
@@ -40,7 +40,26 @@ class ModelsResource(SyncAPIResource):
         """
         return ModelsResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def list_models(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ModelList:
+        """List all the available models"""
+        return self._get(
+            "/v1/models",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ModelList,
+        )
+
+    def retrieve_model(
         self,
         model: str,
         *,
@@ -71,25 +90,6 @@ class ModelsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Model,
-        )
-
-    def list(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelListResponse:
-        """List all the available models"""
-        return self._get(
-            "/v1/models",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ModelListResponse,
         )
 
 
@@ -113,7 +113,26 @@ class AsyncModelsResource(AsyncAPIResource):
         """
         return AsyncModelsResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def list_models(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ModelList:
+        """List all the available models"""
+        return await self._get(
+            "/v1/models",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ModelList,
+        )
+
+    async def retrieve_model(
         self,
         model: str,
         *,
@@ -146,35 +165,16 @@ class AsyncModelsResource(AsyncAPIResource):
             cast_to=Model,
         )
 
-    async def list(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelListResponse:
-        """List all the available models"""
-        return await self._get(
-            "/v1/models",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ModelListResponse,
-        )
-
 
 class ModelsResourceWithRawResponse:
     def __init__(self, models: ModelsResource) -> None:
         self._models = models
 
-        self.retrieve = to_raw_response_wrapper(
-            models.retrieve,
+        self.list_models = to_raw_response_wrapper(
+            models.list_models,
         )
-        self.list = to_raw_response_wrapper(
-            models.list,
+        self.retrieve_model = to_raw_response_wrapper(
+            models.retrieve_model,
         )
 
 
@@ -182,11 +182,11 @@ class AsyncModelsResourceWithRawResponse:
     def __init__(self, models: AsyncModelsResource) -> None:
         self._models = models
 
-        self.retrieve = async_to_raw_response_wrapper(
-            models.retrieve,
+        self.list_models = async_to_raw_response_wrapper(
+            models.list_models,
         )
-        self.list = async_to_raw_response_wrapper(
-            models.list,
+        self.retrieve_model = async_to_raw_response_wrapper(
+            models.retrieve_model,
         )
 
 
@@ -194,11 +194,11 @@ class ModelsResourceWithStreamingResponse:
     def __init__(self, models: ModelsResource) -> None:
         self._models = models
 
-        self.retrieve = to_streamed_response_wrapper(
-            models.retrieve,
+        self.list_models = to_streamed_response_wrapper(
+            models.list_models,
         )
-        self.list = to_streamed_response_wrapper(
-            models.list,
+        self.retrieve_model = to_streamed_response_wrapper(
+            models.retrieve_model,
         )
 
 
@@ -206,9 +206,9 @@ class AsyncModelsResourceWithStreamingResponse:
     def __init__(self, models: AsyncModelsResource) -> None:
         self._models = models
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            models.retrieve,
+        self.list_models = async_to_streamed_response_wrapper(
+            models.list_models,
         )
-        self.list = async_to_streamed_response_wrapper(
-            models.list,
+        self.retrieve_model = async_to_streamed_response_wrapper(
+            models.retrieve_model,
         )

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["EmbeddingCreateParams"]
+__all__ = ["EmbeddingCreateEmbeddingParams"]
 
 
-class EmbeddingCreateParams(TypedDict, total=False):
+class EmbeddingCreateEmbeddingParams(TypedDict, total=False):
     input: Required[object]
 
     model: Required[str]

@@ -32,24 +32,18 @@ client = Relaxai(
     api_key=os.environ.get("RELAXAI_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.chat.create_completion(
+chat_completion_response = client.chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "multi_content": [{}],
             "role": "user",
-            "content": "Tell me about climate change.",
-        },
+            "content": "Hello, how are you?",
+        }
     ],
-    model="DeepSeek-R1-0528",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
-    temperature=0.7,
 )
-print(response.id)
+print(chat_completion_response.choices)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -72,24 +66,18 @@ client = AsyncRelaxai(
 
 
 async def main() -> None:
-    response = await client.chat.create_completion(
+    chat_completion_response = await client.chat.create_completion(
         messages=[
             {
                 "multi_content": [{}],
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "multi_content": [{}],
                 "role": "user",
-                "content": "Tell me about climate change.",
-            },
+                "content": "Hello, how are you?",
+            }
         ],
-        model="DeepSeek-R1-0528",
+        model="Llama-4-Maverick-17B-128E",
         max_tokens=100,
-        temperature=0.7,
     )
-    print(response.id)
+    print(chat_completion_response.choices)
 
 
 asyncio.run(main())
@@ -121,24 +109,18 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.chat.create_completion(
+        chat_completion_response = await client.chat.create_completion(
             messages=[
                 {
                     "multi_content": [{}],
-                    "role": "system",
-                    "content": "You are a helpful assistant.",
-                },
-                {
-                    "multi_content": [{}],
                     "role": "user",
-                    "content": "Tell me about climate change.",
-                },
+                    "content": "Hello, how are you?",
+                }
             ],
-            model="DeepSeek-R1-0528",
+            model="Llama-4-Maverick-17B-128E",
             max_tokens=100,
-            temperature=0.7,
         )
-        print(response.id)
+        print(chat_completion_response.choices)
 
 
 asyncio.run(main())
@@ -162,7 +144,7 @@ from relaxai import Relaxai
 
 client = Relaxai()
 
-response = client.chat.create_completion(
+chat_completion_response = client.chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
@@ -175,7 +157,7 @@ response = client.chat.create_completion(
         "type": "type",
     },
 )
-print(response.prediction)
+print(chat_completion_response.prediction)
 ```
 
 ## Handling errors
@@ -198,18 +180,12 @@ try:
         messages=[
             {
                 "multi_content": [{}],
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "multi_content": [{}],
                 "role": "user",
-                "content": "Tell me about climate change.",
-            },
+                "content": "Hello, how are you?",
+            }
         ],
-        model="DeepSeek-R1-0528",
+        model="Llama-4-Maverick-17B-128E",
         max_tokens=100,
-        temperature=0.7,
     )
 except relaxai.APIConnectionError as e:
     print("The server could not be reached")
@@ -257,18 +233,12 @@ client.with_options(max_retries=5).chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "multi_content": [{}],
             "role": "user",
-            "content": "Tell me about climate change.",
-        },
+            "content": "Hello, how are you?",
+        }
     ],
-    model="DeepSeek-R1-0528",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
-    temperature=0.7,
 )
 ```
 
@@ -296,18 +266,12 @@ client.with_options(timeout=5.0).chat.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "multi_content": [{}],
             "role": "user",
-            "content": "Tell me about climate change.",
-        },
+            "content": "Hello, how are you?",
+        }
     ],
-    model="DeepSeek-R1-0528",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
-    temperature=0.7,
 )
 ```
 
@@ -352,16 +316,11 @@ client = Relaxai()
 response = client.chat.with_raw_response.create_completion(
     messages=[{
         "multi_content": [{}],
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    }, {
-        "multi_content": [{}],
         "role": "user",
-        "content": "Tell me about climate change.",
+        "content": "Hello, how are you?",
     }],
-    model="DeepSeek-R1-0528",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
-    temperature=0.7,
 )
 print(response.headers.get('X-My-Header'))
 
@@ -384,18 +343,12 @@ with client.chat.with_streaming_response.create_completion(
     messages=[
         {
             "multi_content": [{}],
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "multi_content": [{}],
             "role": "user",
-            "content": "Tell me about climate change.",
-        },
+            "content": "Hello, how are you?",
+        }
     ],
-    model="DeepSeek-R1-0528",
+    model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
-    temperature=0.7,
 ) as response:
     print(response.headers.get("X-My-Header"))
 

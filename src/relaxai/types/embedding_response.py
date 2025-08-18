@@ -4,10 +4,10 @@ from typing import Dict, List
 
 from pydantic import Field as FieldInfo
 
-from .usage import Usage
 from .._models import BaseModel
+from .shared.openai_usage import OpenAIUsage
 
-__all__ = ["EmbeddingCreateResponse", "Data"]
+__all__ = ["EmbeddingResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -18,7 +18,7 @@ class Data(BaseModel):
     object: str
 
 
-class EmbeddingCreateResponse(BaseModel):
+class EmbeddingResponse(BaseModel):
     data: List[Data]
 
     http_header: Dict[str, List[str]] = FieldInfo(alias="httpHeader")
@@ -27,4 +27,4 @@ class EmbeddingCreateResponse(BaseModel):
 
     object: str
 
-    usage: Usage
+    usage: OpenAIUsage

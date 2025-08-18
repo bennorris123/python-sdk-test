@@ -12,7 +12,9 @@ from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
+    Body,
     Omit,
+    Query,
     Headers,
     Timeout,
     NotGiven,
@@ -22,13 +24,20 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import chat, health, models, embeddings
+from ._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from .resources import chat, models, embeddings
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError
+from ._exceptions import RelaxaiError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
+    make_request_options,
 )
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Relaxai", "AsyncRelaxai", "Client", "AsyncClient"]
@@ -37,13 +46,12 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Relaxai", 
 class Relaxai(SyncAPIClient):
     chat: chat.ChatResource
     embeddings: embeddings.EmbeddingsResource
-    health: health.HealthResource
     models: models.ModelsResource
     with_raw_response: RelaxaiWithRawResponse
     with_streaming_response: RelaxaiWithStreamedResponse
 
     # client options
-    api_key: str | None
+    api_key: str
 
     def __init__(
         self,
@@ -74,12 +82,16 @@ class Relaxai(SyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("RELAXAI_API_KEY")
+        if api_key is None:
+            raise RelaxaiError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the RELAXAI_API_KEY environment variable"
+            )
         self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("RELAXAI_BASE_URL")
         if base_url is None:
-            base_url = f"http://127.0.0.1"
+            base_url = f"https://api.relax.ai"
 
         super().__init__(
             version=__version__,
@@ -94,7 +106,6 @@ class Relaxai(SyncAPIClient):
 
         self.chat = chat.ChatResource(self)
         self.embeddings = embeddings.EmbeddingsResource(self)
-        self.health = health.HealthResource(self)
         self.models = models.ModelsResource(self)
         self.with_raw_response = RelaxaiWithRawResponse(self)
         self.with_streaming_response = RelaxaiWithStreamedResponse(self)
@@ -108,8 +119,6 @@ class Relaxai(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        if api_key is None:
-            return {}
         return {"Authorization": f"Bearer {api_key}"}
 
     @property
@@ -120,17 +129,6 @@ class Relaxai(SyncAPIClient):
             "X-Stainless-Async": "false",
             **self._custom_headers,
         }
-
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
-        )
 
     def copy(
         self,
@@ -182,6 +180,25 @@ class Relaxai(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    def health(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """Check the health of the service."""
+        return self.get(
+            "/v1/health",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
 
     @override
     def _make_status_error(
@@ -220,13 +237,12 @@ class Relaxai(SyncAPIClient):
 class AsyncRelaxai(AsyncAPIClient):
     chat: chat.AsyncChatResource
     embeddings: embeddings.AsyncEmbeddingsResource
-    health: health.AsyncHealthResource
     models: models.AsyncModelsResource
     with_raw_response: AsyncRelaxaiWithRawResponse
     with_streaming_response: AsyncRelaxaiWithStreamedResponse
 
     # client options
-    api_key: str | None
+    api_key: str
 
     def __init__(
         self,
@@ -257,12 +273,16 @@ class AsyncRelaxai(AsyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("RELAXAI_API_KEY")
+        if api_key is None:
+            raise RelaxaiError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the RELAXAI_API_KEY environment variable"
+            )
         self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("RELAXAI_BASE_URL")
         if base_url is None:
-            base_url = f"http://127.0.0.1"
+            base_url = f"https://api.relax.ai"
 
         super().__init__(
             version=__version__,
@@ -277,7 +297,6 @@ class AsyncRelaxai(AsyncAPIClient):
 
         self.chat = chat.AsyncChatResource(self)
         self.embeddings = embeddings.AsyncEmbeddingsResource(self)
-        self.health = health.AsyncHealthResource(self)
         self.models = models.AsyncModelsResource(self)
         self.with_raw_response = AsyncRelaxaiWithRawResponse(self)
         self.with_streaming_response = AsyncRelaxaiWithStreamedResponse(self)
@@ -291,8 +310,6 @@ class AsyncRelaxai(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        if api_key is None:
-            return {}
         return {"Authorization": f"Bearer {api_key}"}
 
     @property
@@ -303,17 +320,6 @@ class AsyncRelaxai(AsyncAPIClient):
             "X-Stainless-Async": f"async:{get_async_library()}",
             **self._custom_headers,
         }
-
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
-        )
 
     def copy(
         self,
@@ -365,6 +371,25 @@ class AsyncRelaxai(AsyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    async def health(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """Check the health of the service."""
+        return await self.get(
+            "/v1/health",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
 
     @override
     def _make_status_error(
@@ -404,32 +429,44 @@ class RelaxaiWithRawResponse:
     def __init__(self, client: Relaxai) -> None:
         self.chat = chat.ChatResourceWithRawResponse(client.chat)
         self.embeddings = embeddings.EmbeddingsResourceWithRawResponse(client.embeddings)
-        self.health = health.HealthResourceWithRawResponse(client.health)
         self.models = models.ModelsResourceWithRawResponse(client.models)
+
+        self.health = to_raw_response_wrapper(
+            client.health,
+        )
 
 
 class AsyncRelaxaiWithRawResponse:
     def __init__(self, client: AsyncRelaxai) -> None:
         self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
         self.embeddings = embeddings.AsyncEmbeddingsResourceWithRawResponse(client.embeddings)
-        self.health = health.AsyncHealthResourceWithRawResponse(client.health)
         self.models = models.AsyncModelsResourceWithRawResponse(client.models)
+
+        self.health = async_to_raw_response_wrapper(
+            client.health,
+        )
 
 
 class RelaxaiWithStreamedResponse:
     def __init__(self, client: Relaxai) -> None:
         self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
         self.embeddings = embeddings.EmbeddingsResourceWithStreamingResponse(client.embeddings)
-        self.health = health.HealthResourceWithStreamingResponse(client.health)
         self.models = models.ModelsResourceWithStreamingResponse(client.models)
+
+        self.health = to_streamed_response_wrapper(
+            client.health,
+        )
 
 
 class AsyncRelaxaiWithStreamedResponse:
     def __init__(self, client: AsyncRelaxai) -> None:
         self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)
         self.embeddings = embeddings.AsyncEmbeddingsResourceWithStreamingResponse(client.embeddings)
-        self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
         self.models = models.AsyncModelsResourceWithStreamingResponse(client.models)
+
+        self.health = async_to_streamed_response_wrapper(
+            client.health,
+        )
 
 
 Client = Relaxai

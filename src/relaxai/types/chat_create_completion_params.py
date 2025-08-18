@@ -5,17 +5,11 @@ from __future__ import annotations
 from typing import Dict, List, Iterable
 from typing_extensions import Required, TypedDict
 
+from .stream_options_param import StreamOptionsParam
 from .function_definition_param import FunctionDefinitionParam
 from .chat_completion_message_param import ChatCompletionMessageParam
 
-__all__ = [
-    "ChatCreateCompletionParams",
-    "Prediction",
-    "ResponseFormat",
-    "ResponseFormatJsonSchema",
-    "StreamOptions",
-    "Tool",
-]
+__all__ = ["ChatCreateCompletionParams", "Prediction", "ResponseFormat", "ResponseFormatJsonSchema", "Tool"]
 
 
 class ChatCreateCompletionParams(TypedDict, total=False):
@@ -61,7 +55,7 @@ class ChatCreateCompletionParams(TypedDict, total=False):
 
     stream: bool
 
-    stream_options: StreamOptions
+    stream_options: StreamOptionsParam
 
     temperature: float
 
@@ -94,10 +88,6 @@ class ResponseFormat(TypedDict, total=False):
     json_schema: ResponseFormatJsonSchema
 
     type: str
-
-
-class StreamOptions(TypedDict, total=False):
-    include_usage: bool
 
 
 class Tool(TypedDict, total=False):

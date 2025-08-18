@@ -7,10 +7,10 @@ from pydantic import Field as FieldInfo
 from .model import Model
 from .._models import BaseModel
 
-__all__ = ["ModelListResponse"]
+__all__ = ["ModelList"]
 
 
-class ModelListResponse(BaseModel):
+class ModelList(BaseModel):
     data: List[Model]
 
     http_header: Dict[str, List[str]] = FieldInfo(alias="httpHeader")

@@ -4,13 +4,13 @@ from typing import Dict, List, Optional
 
 from pydantic import Field as FieldInfo
 
-from .usage import Usage
 from .._models import BaseModel
+from .shared.openai_usage import OpenAIUsage
 from .content_filter_results import ContentFilterResults
 from .chat_completion_message import ChatCompletionMessage
 
 __all__ = [
-    "ChatCreateCompletionResponse",
+    "ChatCompletionResponse",
     "Choice",
     "ChoiceLogprobs",
     "ChoiceLogprobsContent",
@@ -59,7 +59,7 @@ class PromptFilterResult(BaseModel):
     content_filter_results: Optional[ContentFilterResults] = None
 
 
-class ChatCreateCompletionResponse(BaseModel):
+class ChatCompletionResponse(BaseModel):
     id: str
 
     choices: List[Choice]
@@ -74,6 +74,6 @@ class ChatCreateCompletionResponse(BaseModel):
 
     system_fingerprint: str
 
-    usage: Usage
+    usage: OpenAIUsage
 
     prompt_filter_results: Optional[List[PromptFilterResult]] = None

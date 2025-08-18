@@ -18,9 +18,10 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.stream_options_param import StreamOptionsParam
+from ..types.chat_completion_response import ChatCompletionResponse
 from ..types.function_definition_param import FunctionDefinitionParam
 from ..types.chat_completion_message_param import ChatCompletionMessageParam
-from ..types.chat_create_completion_response import ChatCreateCompletionResponse
 
 __all__ = ["ChatResource", "AsyncChatResource"]
 
@@ -69,7 +70,7 @@ class ChatResource(SyncAPIResource):
         stop: List[str] | NotGiven = NOT_GIVEN,
         store: bool | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
-        stream_options: chat_create_completion_params.StreamOptions | NotGiven = NOT_GIVEN,
+        stream_options: StreamOptionsParam | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         tool_choice: object | NotGiven = NOT_GIVEN,
         tools: Iterable[chat_create_completion_params.Tool] | NotGiven = NOT_GIVEN,
@@ -82,7 +83,7 @@ class ChatResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ChatCreateCompletionResponse:
+    ) -> ChatCompletionResponse:
         """
         Creates a chat completion for the given model
 
@@ -133,7 +134,7 @@ class ChatResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChatCreateCompletionResponse,
+            cast_to=ChatCompletionResponse,
         )
 
 
@@ -181,7 +182,7 @@ class AsyncChatResource(AsyncAPIResource):
         stop: List[str] | NotGiven = NOT_GIVEN,
         store: bool | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
-        stream_options: chat_create_completion_params.StreamOptions | NotGiven = NOT_GIVEN,
+        stream_options: StreamOptionsParam | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         tool_choice: object | NotGiven = NOT_GIVEN,
         tools: Iterable[chat_create_completion_params.Tool] | NotGiven = NOT_GIVEN,
@@ -194,7 +195,7 @@ class AsyncChatResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ChatCreateCompletionResponse:
+    ) -> ChatCompletionResponse:
         """
         Creates a chat completion for the given model
 
@@ -245,7 +246,7 @@ class AsyncChatResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChatCreateCompletionResponse,
+            cast_to=ChatCompletionResponse,
         )
 
 
