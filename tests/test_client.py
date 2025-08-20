@@ -718,7 +718,7 @@ class TestRelaxai:
             client.chat.with_streaming_response.create_completion(
                 messages=[
                     {
-                        "content": "content",
+                        "multi_content": [{}],
                         "role": "role",
                     }
                 ],
@@ -736,7 +736,7 @@ class TestRelaxai:
             client.chat.with_streaming_response.create_completion(
                 messages=[
                     {
-                        "content": "content",
+                        "multi_content": [{}],
                         "role": "role",
                     }
                 ],
@@ -773,7 +773,7 @@ class TestRelaxai:
         response = client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "content": "content",
+                    "multi_content": [{}],
                     "role": "role",
                 }
             ],
@@ -805,7 +805,7 @@ class TestRelaxai:
         response = client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "content": "content",
+                    "multi_content": [{}],
                     "role": "role",
                 }
             ],
@@ -837,7 +837,7 @@ class TestRelaxai:
         response = client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "content": "content",
+                    "multi_content": [{}],
                     "role": "role",
                 }
             ],
@@ -1577,7 +1577,7 @@ class TestAsyncRelaxai:
             await async_client.chat.with_streaming_response.create_completion(
                 messages=[
                     {
-                        "content": "content",
+                        "multi_content": [{}],
                         "role": "role",
                     }
                 ],
@@ -1595,7 +1595,7 @@ class TestAsyncRelaxai:
             await async_client.chat.with_streaming_response.create_completion(
                 messages=[
                     {
-                        "content": "content",
+                        "multi_content": [{}],
                         "role": "role",
                     }
                 ],
@@ -1633,7 +1633,7 @@ class TestAsyncRelaxai:
         response = await client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "content": "content",
+                    "multi_content": [{}],
                     "role": "role",
                 }
             ],
@@ -1666,7 +1666,7 @@ class TestAsyncRelaxai:
         response = await client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "content": "content",
+                    "multi_content": [{}],
                     "role": "role",
                 }
             ],
@@ -1699,7 +1699,7 @@ class TestAsyncRelaxai:
         response = await client.chat.with_raw_response.create_completion(
             messages=[
                 {
-                    "content": "content",
+                    "multi_content": [{}],
                     "role": "role",
                 }
             ],
