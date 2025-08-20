@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.11.0 (2025-08-20)
+
+Full Changelog: [v0.1.0...v0.11.0](https://github.com/bennorris123/python-sdk-test/compare/v0.1.0...v0.11.0)
+
+### Chores
+
+* sync repo ([8b4f938](https://github.com/bennorris123/python-sdk-test/commit/8b4f93863d6771931ceaa4441a43e4fd45300804))
+* update SDK settings ([5e557e4](https://github.com/bennorris123/python-sdk-test/commit/5e557e44d1f50b8f26e94253d9ab6e0bf2941689))
+* update SDK settings ([1d0944d](https://github.com/bennorris123/python-sdk-test/commit/1d0944db459fd31e320413b82ad110dcc7c52bd3))
+
 ## 0.1.0 (2025-07-25)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/relax-ai/python-sdk/compare/v0.0.1...v0.1.0)
