@@ -181,7 +181,7 @@ try:
             {
                 "multi_content": [{}],
                 "role": "user",
-                "content": "Hello, how are you?",
+                "content": "Hello there, how are you?",
             }
         ],
         model="Llama-4-Maverick-17B-128E",
@@ -234,7 +234,7 @@ client.with_options(max_retries=5).chat.create_completion(
         {
             "multi_content": [{}],
             "role": "user",
-            "content": "Hello, how are you?",
+            "content": "Hello there, how are you?",
         }
     ],
     model="Llama-4-Maverick-17B-128E",
@@ -267,7 +267,7 @@ client.with_options(timeout=5.0).chat.create_completion(
         {
             "multi_content": [{}],
             "role": "user",
-            "content": "Hello, how are you?",
+            "content": "Hello there, how are you?",
         }
     ],
     model="Llama-4-Maverick-17B-128E",
@@ -317,7 +317,7 @@ response = client.chat.with_raw_response.create_completion(
     messages=[{
         "multi_content": [{}],
         "role": "user",
-        "content": "Hello, how are you?",
+        "content": "Hello there, how are you?",
     }],
     model="Llama-4-Maverick-17B-128E",
     max_tokens=100,
@@ -344,7 +344,7 @@ with client.chat.with_streaming_response.create_completion(
         {
             "multi_content": [{}],
             "role": "user",
-            "content": "Hello, how are you?",
+            "content": "Hello there, how are you?",
         }
     ],
     model="Llama-4-Maverick-17B-128E",
