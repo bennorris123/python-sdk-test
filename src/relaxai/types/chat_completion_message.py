@@ -35,13 +35,13 @@ class ToolCall(BaseModel):
 
 
 class ChatCompletionMessage(BaseModel):
-    content: str
+    multi_content: List[MultiContent] = FieldInfo(alias="MultiContent")
 
     role: str
 
-    function_call: Optional[FunctionCall] = None
+    content: Optional[str] = None
 
-    multi_content: Optional[List[MultiContent]] = FieldInfo(alias="MultiContent", default=None)
+    function_call: Optional[FunctionCall] = None
 
     name: Optional[str] = None
 

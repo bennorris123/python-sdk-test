@@ -1,7 +1,7 @@
 # Relaxai Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/relaxai-test.svg?label=pypi%20(stable))](https://pypi.org/project/relaxai-test/)
+[![PyPI version](https://img.shields.io/pypi/v/relaxai.svg?label=pypi%20(stable))](https://pypi.org/project/relaxai/)
 
 The Relaxai Python library provides convenient access to the Relaxai REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -17,7 +17,7 @@ The REST API documentation can be found on [www.relax.ai](https://www.relax.ai).
 
 ```sh
 # install from PyPI
-pip install relaxai-test
+pip install relaxai
 ```
 
 ## Usage
@@ -35,6 +35,7 @@ client = Relaxai(
 chat_completion_response = client.chat.create_completion(
     messages=[
         {
+            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -68,6 +69,7 @@ async def main() -> None:
     chat_completion_response = await client.chat.create_completion(
         messages=[
             {
+                "multi_content": [{}],
                 "role": "user",
                 "content": "Hello, how are you?",
             }
@@ -91,7 +93,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install relaxai-test[aiohttp]
+pip install relaxai[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -110,6 +112,7 @@ async def main() -> None:
         chat_completion_response = await client.chat.create_completion(
             messages=[
                 {
+                    "multi_content": [{}],
                     "role": "user",
                     "content": "Hello, how are you?",
                 }
@@ -144,7 +147,7 @@ client = Relaxai()
 chat_completion_response = client.chat.create_completion(
     messages=[
         {
-            "content": "content",
+            "multi_content": [{}],
             "role": "role",
         }
     ],
@@ -176,6 +179,7 @@ try:
     client.chat.create_completion(
         messages=[
             {
+                "multi_content": [{}],
                 "role": "user",
                 "content": "Hello, how are you?",
             }
@@ -228,6 +232,7 @@ client = Relaxai(
 client.with_options(max_retries=5).chat.create_completion(
     messages=[
         {
+            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -260,6 +265,7 @@ client = Relaxai(
 client.with_options(timeout=5.0).chat.create_completion(
     messages=[
         {
+            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -309,6 +315,7 @@ from relaxai import Relaxai
 client = Relaxai()
 response = client.chat.with_raw_response.create_completion(
     messages=[{
+        "multi_content": [{}],
         "role": "user",
         "content": "Hello, how are you?",
     }],
@@ -321,9 +328,9 @@ chat = response.parse()  # get the object that `chat.create_completion()` would 
 print(chat.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/bennorris123/python-sdk-test/tree/main/src/relaxai/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/relax-ai/python-sdk/tree/main/src/relaxai/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/bennorris123/python-sdk-test/tree/main/src/relaxai/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/relax-ai/python-sdk/tree/main/src/relaxai/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -335,6 +342,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.chat.with_streaming_response.create_completion(
     messages=[
         {
+            "multi_content": [{}],
             "role": "user",
             "content": "Hello, how are you?",
         }
@@ -436,7 +444,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/bennorris123/python-sdk-test/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/relax-ai/python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 

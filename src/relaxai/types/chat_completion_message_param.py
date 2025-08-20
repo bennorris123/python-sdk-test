@@ -36,13 +36,13 @@ class ToolCall(TypedDict, total=False):
 
 
 class ChatCompletionMessageParam(TypedDict, total=False):
-    content: Required[str]
+    multi_content: Required[Annotated[Iterable[MultiContent], PropertyInfo(alias="MultiContent")]]
 
     role: Required[str]
 
-    function_call: FunctionCallParam
+    content: str
 
-    multi_content: Annotated[Iterable[MultiContent], PropertyInfo(alias="MultiContent")]
+    function_call: FunctionCallParam
 
     name: str
 
